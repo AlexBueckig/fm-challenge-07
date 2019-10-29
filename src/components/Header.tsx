@@ -23,7 +23,6 @@ interface Props {}
 
 const Header: React.FC<Props> = () => {
   const { dark, toggle } = useTheme();
-  console.log(dark);
 
   return (
     <HeaderElement>
