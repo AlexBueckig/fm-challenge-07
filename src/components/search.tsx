@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.elements};
   color: ${({ theme }) => theme.color};
   width: 250px;
+  margin-bottom: 2em;
 `;
 
 const Input = styled.input`

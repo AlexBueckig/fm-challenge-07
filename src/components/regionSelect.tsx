@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   background: ${({ theme }) => theme.elements};
   overflow: hidden;
+  margin-bottom: 2em;
 `;
 
 const Select = styled.select`

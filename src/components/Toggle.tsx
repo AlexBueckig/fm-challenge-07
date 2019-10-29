@@ -2,8 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { styled } from '../hooks/useTheme';
 
+const Wrapper = styled.div`
+  cursor: pointer;
+`;
+
 const Label = styled.label`
   margin-left: 1em;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -20,13 +25,13 @@ interface Props {
 
 const Toggle: React.FC<Props> = ({ dark, toggle }) => {
   return (
-    <div>
+    <Wrapper>
       <Input type="checkbox" id="darkmode-toggle" checked={dark} onChange={toggle} />
       <Label htmlFor="darkmode-toggle">
         <MoonIcon icon="moon" />
         Dark Mode
       </Label>
-    </div>
+    </Wrapper>
   );
 };
 

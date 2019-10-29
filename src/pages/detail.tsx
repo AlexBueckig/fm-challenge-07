@@ -135,7 +135,7 @@ const Detail: React.FC<RouteComponentProps<{ id: string }, Props>> = props => {
         <SubTitle>Border Countries:</SubTitle>
         <BorderList>
           {country.borders.map(border => (
-            <BorderListItem>{border}</BorderListItem>
+            <BorderListItem key={border}>{border}</BorderListItem>
           ))}
         </BorderList>
       </Grid>
