@@ -50,7 +50,7 @@ interface Props {
 const Card: FC<Props> = ({ country }) => {
   return (
     <Container>
-      <Flag src={country.flag} />
+      <Flag src={country.flag} alt={`flag of ${country.name}`} />
       <Body>
         <Title>{country.name}</Title>
         <List>

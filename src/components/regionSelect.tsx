@@ -26,6 +26,13 @@ const Select = styled.select`
   cursor: pointer;
 `;
 
+const Option = styled.option`
+  border: none;
+  &:hover {
+    color: green;
+  }
+`;
+
 const DownArrowIcon = styled(FontAwesomeIcon)`
   position: absolute;
   right: 1em;
@@ -43,15 +50,15 @@ const RegionSelect: React.FC<Props> = () => {
 
   return (
     <Wrapper>
-      <Select defaultValue="default" onChange={onChange}>
-        <option value="default" disabled style={{ display: 'none' }}>
+      <Select defaultValue="default" onChange={onChange} aria-label="Region select">
+        <Option value="default" disabled style={{ display: 'none' }}>
           Filter by Region
-        </option>
-        <option value="africa">Africa</option>
-        <option value="americas">Americas</option>
-        <option value="asia">Asia</option>
-        <option value="europe">Europe</option>
-        <option value="oceania">Oceania</option>
+        </Option>
+        <Option value="africa">Africa</Option>
+        <Option value="americas">Americas</Option>
+        <Option value="asia">Asia</Option>
+        <Option value="europe">Europe</Option>
+        <Option value="oceania">Oceania</Option>
       </Select>
       <DownArrowIcon icon="angle-down" />
     </Wrapper>

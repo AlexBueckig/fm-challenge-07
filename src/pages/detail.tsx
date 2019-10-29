@@ -102,7 +102,7 @@ const Detail: React.FC<RouteComponentProps<{ id: string }, Props>> = props => {
         <BackIcon icon="arrow-left" /> Back
       </BackButton>
       <Grid>
-        <Flag src={country.flag} />
+        <Flag src={country.flag} alt={`flag of ${country.name}`} />
         <Title>{country.name}</Title>
         <List>
           <ListItem>
