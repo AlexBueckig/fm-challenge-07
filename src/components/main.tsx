@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Theme } from '../hooks/useTheme';
-import Container from './container';
+import Container from './Container';
 
 interface Props {}
 

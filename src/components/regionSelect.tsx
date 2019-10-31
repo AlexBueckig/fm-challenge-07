@@ -55,11 +55,12 @@ const RegionSelect: React.FC<Props> = () => {
         <Option value="default" disabled style={{ display: 'none' }}>
           Filter by Region
         </Option>
-        <Option value="africa">Africa</Option>
-        <Option value="americas">Americas</Option>
-        <Option value="asia">Asia</Option>
-        <Option value="europe">Europe</Option>
-        <Option value="oceania">Oceania</Option>
+        <Option value="All">All Regions</Option>
+        <Option value="Africa">Africa</Option>
+        <Option value="Americas">Americas</Option>
+        <Option value="Asia">Asia</Option>
+        <Option value="Europe">Europe</Option>
+        <Option value="Oceania">Oceania</Option>
       </Select>
       <DownArrowIcon icon="angle-down" />
     </Wrapper>

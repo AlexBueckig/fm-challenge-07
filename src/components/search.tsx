@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
+import { useCountryState } from '../hooks/useCountryState';
 import { styled } from '../hooks/useTheme';
-import SearchResultList from './searchResultList';
 
 interface Props {}
 
@@ -35,18 +35,13 @@ const Label = styled.label`
 const SearchIcon = styled(FontAwesomeIcon)``;
 
 const Search: React.FC<Props> = () => {
-  const [searchResult, setSearchResult] = useState<{ name: string }[]>([]);
-  const [focused, setFocused] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const { getCountriesByName, reset } = useCountryState();
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length >= 3) {
-      fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}?fields=name`)
-        .then(res => res.json())
-        .then(res => setSearchResult(res));
-      setShowResults(true);
+      getCountriesByName(event.target.value);
     } else {
-      setShowResults(false);
+      reset();
     }
   };
 
@@ -60,11 +55,8 @@ const Search: React.FC<Props> = () => {
         type="text"
         placeholder="Search for a country..."
         onChange={onChange}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setTimeout(() => setFocused(false), 250)}
         aria-label="search field"
       />
-      {searchResult.length > 0 && focused && showResults ? <SearchResultList results={searchResult} /> : null}
     </Wrapper>
   );
 };

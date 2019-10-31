@@ -5,11 +5,11 @@ import ErrorBoundary from 'react-error-boundary';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header';
-import Main from './components/main';
+import Main from './components/Main';
 import { CountryStateProvider } from './hooks/useCountryState';
 import { ThemeProvider } from './hooks/useTheme';
-import Detail from './pages/detail';
-import Home from './pages/home';
+import Detail from './pages/Detail';
+import Home from './pages/Home';
 
 library.add(faAngleDown, faSearch, faMoon, faArrowLeft);
 

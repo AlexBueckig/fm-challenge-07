@@ -1,8 +1,8 @@
 import React from 'react';
-import CountryList from '../components/countryList';
-import RegionSelect from '../components/regionSelect';
+import CountryList from '../components/CountryList';
+import RegionSelect from '../components/RegionSelect';
 import Row from '../components/Row';
-import Search from '../components/search';
+import Search from '../components/Search';
 
 interface Props {}
 

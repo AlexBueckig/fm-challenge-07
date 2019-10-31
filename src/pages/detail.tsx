@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
-import Container from '../components/container';
+import Container from '../components/Container';
 import { styled } from '../hooks/useTheme';
 import { Country } from '../types/Country';
 
