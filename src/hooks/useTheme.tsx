@@ -5,6 +5,7 @@ import React, { createContext, FC, useContext, useEffect, useState } from 'react
 interface ThemeContext {
   dark: boolean;
   toggle: () => void;
+  colors: Theme;
 }
 
 const ThemeContext = createContext<ThemeContext | null>(null);
@@ -50,7 +51,7 @@ const ThemeProvider: FC = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ dark: themeState, toggle }}>
+    <ThemeContext.Provider value={{ dark: themeState, toggle, colors: themeState ? theme.dark : theme.light }}>
       <EmotionThemeProvider<Theme> theme={themeState ? theme.dark : theme.light}>{children}</EmotionThemeProvider>
     </ThemeContext.Provider>
   );

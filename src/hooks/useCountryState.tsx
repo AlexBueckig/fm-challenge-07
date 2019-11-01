@@ -1,4 +1,4 @@
-import React, { createContext, FC, Reducer, useContext, useEffect, useReducer, useState } from 'react';
+import React, { createContext, FC, Reducer, useContext, useEffect, useReducer, useRef } from 'react';
 import { Country } from '../types/Country';
 
 interface CountryState {
@@ -25,31 +25,33 @@ const useCountryState = () => {
 };
 
 const useCountryApi = () => {
-  const [initialState, setInitialState] = useState<Country[]>([]);
+  const initialState = useRef<Country[]>([]);
 
   const reducer: Reducer<Country[], Actions> = (state, action) => {
+    const { current } = initialState;
+
     switch (action.type) {
       case 'region':
-        if (action.filter === 'All') return initialState;
-        return initialState.filter(country => country.region === action.filter);
+        if (action.filter === 'All') return current;
+        return current.filter(country => country.region === action.filter);
       case 'name':
-        return initialState.filter(country => country.name.toLowerCase().includes(action.filter));
+        return current.filter(country => country.name.toLowerCase().includes(action.filter));
       case 'update':
         return action.state;
       case 'reset':
-        return initialState;
+        return current;
       default:
         throw new Error('Unknown action...');
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState.current);
 
   useEffect(() => {
     fetch('https://restcountries.eu/rest/v2/')
       .then(res => res.json())
       .then(res => {
-        setInitialState(res);
+        initialState.current = res;
         dispatch({ type: 'update', state: res });
       });
   }, []);

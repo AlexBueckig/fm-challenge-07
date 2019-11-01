@@ -1,69 +1,99 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+import Select from 'react-select';
+import { ActionMeta } from 'react-select/src/types';
 import { useCountryState } from '../hooks/useCountryState';
-import { styled } from '../hooks/useTheme';
+import { styled, useTheme } from '../hooks/useTheme';
 
-interface Props {}
-
-const Wrapper = styled.div`
-  position: relative;
+const CustomSelect = styled(Select)`
   width: 250px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  background: ${({ theme }) => theme.elements};
-  overflow: hidden;
   margin-bottom: 2em;
-`;
 
-const Select = styled.select`
-  position: relative;
-  padding: 1em;
-  border: none;
-  background: ${({ theme }) => theme.elements};
-  color: ${({ theme }) => theme.color};
-  outline: none;
-  appearance: none;
-  width: 100%;
-  cursor: pointer;
-`;
+  .react-select__value-container {
+    font-size: 0.85rem;
+    height: 45px;
+  }
 
-const Option = styled.option`
-  border: none;
-  &:hover {
-    color: green;
+  .react-select__single-value,
+  .react-select__placeholder {
+    font-size: 0.85rem;
+    padding: 1em;
+  }
+
+  .react-select__single-value {
+    color: ${({ theme }) => theme.color};
+  }
+
+  .react-select__control {
+    background: ${({ theme }) => theme.elements};
+    border: 0;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+  }
+
+  .react-select__menu {
+    background: ${({ theme }) => theme.elements};
+    border: 0;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .react-select__option {
+    cursor: pointer;
+    padding: 1em;
+  }
+
+  .react-select__option:hover,
+  .react-select__option:focus,
+  .react-select__option:active,
+  .react-select__option--is-focused {
+    background: lightgray;
+  }
+
+  .react-select__option--is-selected {
+    background: #999999;
+    color: ${({ theme }) => theme.color};
+  }
+
+  .react-select__input {
+    height: 21px;
+    display: none !important;
   }
 `;
 
-const DownArrowIcon = styled(FontAwesomeIcon)`
-  position: absolute;
-  right: 1em;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-`;
+interface Props {}
 
 const RegionSelect: React.FC<Props> = () => {
-  const { getCountriesByRegion } = useCountryState();
+  const { getCountriesByRegion, reset } = useCountryState();
+  const { colors } = useTheme();
 
-  const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    getCountriesByRegion(event.target.value);
+  const onChange = (value: any, { action }: ActionMeta) => {
+    if (action === 'clear') {
+      reset();
+    } else if (action === 'select-option') {
+      getCountriesByRegion(value.value);
+    }
   };
 
   return (
-    <Wrapper>
-      <Select defaultValue="default" onChange={onChange} aria-label="Region select">
-        <Option value="default" disabled style={{ display: 'none' }}>
-          Filter by Region
-        </Option>
-        <Option value="All">All Regions</Option>
-        <Option value="Africa">Africa</Option>
-        <Option value="Americas">Americas</Option>
-        <Option value="Asia">Asia</Option>
-        <Option value="Europe">Europe</Option>
-        <Option value="Oceania">Oceania</Option>
-      </Select>
-      <DownArrowIcon icon="angle-down" />
-    </Wrapper>
+    <CustomSelect
+      options={[
+        { value: 'Africa', label: 'Africa' },
+        { value: 'Americas', label: 'Americas' },
+        { value: 'Asia', label: 'Asia' },
+        { value: 'Europe', label: 'Europe' },
+        { value: 'Oceania', label: 'Oceania' }
+      ]}
+      placeholder="Select your region..."
+      className="react-select-container"
+      classNamePrefix="react-select"
+      /*       styles={{
+        option: (provided, state) => {
+          console.log(provided, state);
+          return { ...provided };
+        }
+      }} */
+      isClearable={true}
+      onChange={onChange}
+    />
   );
 };
 

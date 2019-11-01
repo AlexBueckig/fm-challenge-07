@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.elements};
   color: ${({ theme }) => theme.color};
   width: 250px;
+  height: 45px;
   margin-bottom: 2em;
 `;
 
@@ -26,6 +27,7 @@ const Input = styled.input`
   color: ${({ theme }) => theme.color};
   flex-grow: 1;
   border-radius: 5px;
+  font-size: 0.9rem;
 `;
 
 const Label = styled.label`
