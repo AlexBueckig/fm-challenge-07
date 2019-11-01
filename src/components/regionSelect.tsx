@@ -85,12 +85,6 @@ const RegionSelect: React.FC<Props> = () => {
       placeholder="Select your region..."
       className="react-select-container"
       classNamePrefix="react-select"
-      /*       styles={{
-        option: (provided, state) => {
-          console.log(provided, state);
-          return { ...provided };
-        }
-      }} */
       isClearable={true}
       onChange={onChange}
     />
